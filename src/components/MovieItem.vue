@@ -1,7 +1,7 @@
 <template>
   <div>
     <figure>
-      <img :src="movie.poster_path">
+      <img @click="onClick" :src="movie.poster_path">
       <figcaption>
         <div class="row">
           <div class="col-sm-9">
@@ -9,7 +9,7 @@
             <p class="text-secondary font-weight-light">{{ movie.tagline }}</p>
           </div>
           <div class="col-sm-3 float-right">
-            <base-button class="btn-sm btn-outline-secondary float-right">
+            <base-button @click="onClick" class="btn-sm btn-outline-secondary float-right">
               {{ movie.release_date }}
             </base-button>
           </div>
@@ -29,6 +29,11 @@ export default {
   },
   props: {
     movie: Object
+  },
+  methods: {
+    onClick () {
+      this.$router.push('/movie/' + this.movie.id)
+    }
   }
 }
 </script>

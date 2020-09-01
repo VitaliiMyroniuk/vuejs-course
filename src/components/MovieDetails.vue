@@ -6,7 +6,7 @@
           <base-logo/>
         </div>
         <div class="col">
-          <i class="fa fa-flip-horizontal fa-search"/>
+          <i @click="onClick" class="fa fa-flip-horizontal fa-search"/>
         </div>
       </div>
       <div class="row">
@@ -58,6 +58,11 @@ export default {
   },
   props: {
     movie: Object
+  },
+  methods: {
+    onClick () {
+      this.$router.push('/')
+    }
   }
 }
 </script>
