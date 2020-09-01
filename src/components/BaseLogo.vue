@@ -1,10 +1,15 @@
 <template>
-  <img src="../assets/logo.png" class="logo" alt="Netflix Roulette logo">
+  <img @click="onClick" src="../assets/logo.png" class="logo" alt="Netflix Roulette logo">
 </template>
 
 <script>
 export default {
-  name: 'BaseLogo'
+  name: 'BaseLogo',
+  methods: {
+    onClick () {
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
