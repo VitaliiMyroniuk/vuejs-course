@@ -7,10 +7,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import SearchPanel from '../components/SearchPanel.vue'
 import SearchResultContainer from '../components/SearchResultContainer.vue'
 import Footer from '../components/Footer.vue'
-import movies from '../assets/movies.json'
 
 export default {
   name: 'HomePage',
@@ -19,23 +19,21 @@ export default {
     SearchResultContainer,
     BaseFooter: Footer
   },
-  data: () => {
-    return {
-      movies: movies
-    }
+  computed: {
+    ...mapState(['movies'])
   },
   methods: {
     searchMovies (searchOptions) {
-      if (searchOptions.inputValue && searchOptions.isTitleSelected) {
-        this.movies = movies.filter(movie => movie.title.toLowerCase().includes(searchOptions.inputValue))
-      } else if (searchOptions.inputValue) {
-        this.movies = movies.filter(movie => movie.genres
-          .filter(genre => genre.toLowerCase().includes(searchOptions.inputValue))
-          .length
-        )
-      } else {
-        this.movies = movies
-      }
+      // if (searchOptions.inputValue && searchOptions.isTitleSelected) {
+      //   this.movies = movies.filter(movie => movie.title.toLowerCase().includes(searchOptions.inputValue))
+      // } else if (searchOptions.inputValue) {
+      //   this.movies = movies.filter(movie => movie.genres
+      //     .filter(genre => genre.toLowerCase().includes(searchOptions.inputValue))
+      //     .length
+      //   )
+      // } else {
+      //   this.movies = movies
+      // }
     }
   }
 }

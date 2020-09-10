@@ -10,7 +10,6 @@
 import MovieDetails from '../components/MovieDetails.vue'
 import SearchResultContainer from '../components/SearchResultContainer.vue'
 import Footer from '../components/Footer.vue'
-import movies from '../assets/movies.json'
 
 export default {
   name: 'MovieDetailsPage',
@@ -21,14 +20,12 @@ export default {
   },
   computed: {
     movie () {
-      return movies.find(movie => `${movie.id}` === this.$route.params.id)
+      const id = this.$route.params.id
+      return this.$store.getters.getMovieById(id)
     },
     similarMovies () {
-      const genres = movies.find(movie => `${movie.id}` === this.$route.params.id).genres
-      return movies.filter(movie => movie.genres
-        .filter(genre => genres.includes(genre))
-        .length
-      )
+      const id = this.$route.params.id
+      return this.$store.getters.getSimilarMoviesById(id)
     }
   }
 }
