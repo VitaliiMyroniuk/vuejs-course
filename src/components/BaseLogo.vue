@@ -7,6 +7,7 @@ export default {
   name: 'BaseLogo',
   methods: {
     onClick () {
+      this.$store.commit('RESET_STATE')
       this.$router.push('/')
     }
   }

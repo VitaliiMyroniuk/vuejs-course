@@ -1,13 +1,13 @@
 <template>
   <div class="app-body">
-    <search-panel @searchMovies="searchMovies"/>
+    <search-panel/>
     <search-result-container :movies="movies"/>
     <base-footer/>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import SearchPanel from '../components/SearchPanel.vue'
 import SearchResultContainer from '../components/SearchResultContainer.vue'
 import Footer from '../components/Footer.vue'
@@ -20,21 +20,9 @@ export default {
     BaseFooter: Footer
   },
   computed: {
-    ...mapState(['movies'])
-  },
-  methods: {
-    searchMovies (searchOptions) {
-      // if (searchOptions.inputValue && searchOptions.isTitleSelected) {
-      //   this.movies = movies.filter(movie => movie.title.toLowerCase().includes(searchOptions.inputValue))
-      // } else if (searchOptions.inputValue) {
-      //   this.movies = movies.filter(movie => movie.genres
-      //     .filter(genre => genre.toLowerCase().includes(searchOptions.inputValue))
-      //     .length
-      //   )
-      // } else {
-      //   this.movies = movies
-      // }
-    }
+    ...mapGetters({
+      movies: 'getMovies'
+    })
   }
 }
 </script>

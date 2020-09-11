@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     onClick () {
+      this.$store.commit('RESET_STATE')
       this.$router.push('/')
     }
   }

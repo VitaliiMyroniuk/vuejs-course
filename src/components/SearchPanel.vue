@@ -11,8 +11,8 @@
           <h2 class="text-light font-weight-light text-uppercase">Find Your Own Movie</h2>
         </div>
       </div>
-      <search-bar @searchMovies="searchMovies"/>
-      <search-options @updateSearchOptions="updateSearchOptions"/>
+      <search-bar/>
+      <search-options/>
     </div>
   </header>
 </template>
@@ -28,22 +28,6 @@ export default {
     BaseLogo,
     SearchBar,
     SearchOptions
-  },
-  data: () => {
-    return {
-      isTitleSelected: true
-    }
-  },
-  methods: {
-    updateSearchOptions (option) {
-      this.isTitleSelected = option === 'title'
-    },
-    searchMovies (inputValue) {
-      this.$emit('searchMovies', {
-        inputValue: inputValue,
-        isTitleSelected: this.isTitleSelected
-      })
-    }
   }
 }
 </script>

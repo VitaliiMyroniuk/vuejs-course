@@ -28,10 +28,10 @@ export default {
   },
   methods: {
     sortByReleaseDate () {
-      this.$emit('sortMovies', 'release_date')
+      this.$store.commit('UPDATE_SORT_OPTION', 'release_date')
     },
     sortByRating () {
-      this.$emit('sortMovies', 'rating')
+      this.$store.commit('UPDATE_SORT_OPTION', 'rating')
     }
   },
   computed: {

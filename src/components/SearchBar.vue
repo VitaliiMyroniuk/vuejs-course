@@ -21,14 +21,19 @@ export default {
   components: {
     BaseButton
   },
-  data: () => {
-    return {
-      inputValue: ''
+  computed: {
+    inputValue: {
+      set (value) {
+        this.$store.commit('UPDATE_INPUT_VALUE', value.trim())
+      },
+      get () {
+        return this.$store.state.inputValue
+      }
     }
   },
   methods: {
     searchMovies () {
-      this.$emit('searchMovies', this.inputValue.trim().toLowerCase())
+      this.$store.commit('SEARCH_MOVIES')
     }
   }
 }
