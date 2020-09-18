@@ -15,7 +15,7 @@
       "Adventure",
       "Science Fiction"
     ],
-    "runtime": "154min"
+    "runtime": 154
   },
   {
     "id": 424785,
@@ -33,7 +33,7 @@
       "Action",
       "Adventure"
     ],
-    "runtime": "123min"
+    "runtime": 123
   },
   {
     "id": 299534,
@@ -70,7 +70,7 @@
       "Fantasy",
       "Science Fiction"
     ],
-    "runtime": "127min"
+    "runtime": 127
   },
   {
     "id": 320288,
@@ -87,7 +87,7 @@
       "Action",
       "Science Fiction"
     ],
-    "runtime": "135min"
+    "runtime": 135
   },
   {
     "id": 181790,

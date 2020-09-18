@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         <div class="col col-md-4 text-center">
-          <img class="movie-img" :src="movie.poster_path">
+          <img class="movie-img" :alt="movie.title" :src="movie.poster_path">
         </div>
         <div class="col col-md-7">
           <div class="row">
@@ -31,10 +31,10 @@
           </div>
           <div class="row">
             <div class="col col-md-3">
-              <h4 class="text-danger font-weight-light">{{ movie.release_date }}</h4>
+              <h4 class="text-danger font-weight-light">{{ movie.release_date | toYears }}</h4>
             </div>
             <div class="col col-md-3">
-              <h4 class="text-danger font-weight-light">{{ movie.runtime }}</h4>
+              <h4 class="text-danger font-weight-light">{{ movie.runtime | toMinutes }}</h4>
             </div>
           </div>
           <div class="row">
