@@ -1,7 +1,7 @@
 <template>
   <div>
     <figure>
-      <img @click="onClick" :src="movie.poster_path">
+      <lazy-image @click="onClick" :alt="movie.title" :src="movie.poster_path"/>
       <figcaption>
         <div class="row">
           <div class="col-sm-9">
