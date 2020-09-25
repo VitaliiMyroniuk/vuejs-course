@@ -1,12 +1,13 @@
 <template>
   <div class="app-body">
     <movie-details :movie="movie"/>
-    <search-result-container :genres="movie.genres" :movies="similarMovies"/>
+    <search-result-container :genres="movie.genres" :movies="movies"/>
     <base-footer/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import MovieDetails from '../components/MovieDetails.vue'
 import SearchResultContainer from '../components/SearchResultContainer.vue'
 import Footer from '../components/Footer.vue'
@@ -19,14 +20,16 @@ export default {
     BaseFooter: Footer
   },
   computed: {
-    movie () {
-      const id = this.$route.params.id
-      return this.$store.getters.getMovieById(id)
-    },
-    similarMovies () {
-      const id = this.$route.params.id
-      return this.$store.getters.getSimilarMoviesById(id)
-    }
+    ...mapState({
+      movie: 'movie',
+      movies: 'movies'
+    })
+  },
+  async mounted () {
+    const id = this.$route.params.id
+    await this.$store.dispatch('loadMovieById', id)
+    this.$store.commit('initSearchParams')
+    await this.$store.dispatch('loadMovies')
   }
 }
 </script>

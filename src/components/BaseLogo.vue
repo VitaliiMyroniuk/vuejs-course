@@ -6,9 +6,10 @@
 export default {
   name: 'BaseLogo',
   methods: {
-    onClick () {
-      this.$store.commit('RESET_STATE')
-      this.$router.push('/')
+    async onClick () {
+      this.$store.commit('initSearchParams')
+      await this.$store.dispatch('loadMovies')
+      await this.$router.push('/')
     }
   }
 }

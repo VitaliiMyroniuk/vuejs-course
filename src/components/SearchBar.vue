@@ -3,7 +3,7 @@
     <div class="col col-lg-7">
       <input type="text"
              class="form-control text-light"
-             v-model="inputValue"
+             v-model="searchInput"
              @keyup.enter="searchMovies"
              placeholder="Search">
     </div>
@@ -22,18 +22,18 @@ export default {
     BaseButton
   },
   computed: {
-    inputValue: {
+    searchInput: {
       set (value) {
-        this.$store.commit('UPDATE_INPUT_VALUE', value.trim())
+        this.$store.commit('setSearchInput', value)
       },
       get () {
-        return this.$store.state.inputValue
+        return this.$store.state.searchParams.search
       }
     }
   },
   methods: {
-    searchMovies () {
-      this.$store.commit('SEARCH_MOVIES')
+    async searchMovies () {
+      await this.$store.dispatch('loadMovies')
     }
   }
 }

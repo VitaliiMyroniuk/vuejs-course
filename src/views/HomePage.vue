@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import SearchPanel from '../components/SearchPanel.vue'
 import SearchResultContainer from '../components/SearchResultContainer.vue'
 import Footer from '../components/Footer.vue'
@@ -20,9 +20,13 @@ export default {
     BaseFooter: Footer
   },
   computed: {
-    ...mapGetters({
-      movies: 'getMovies'
+    ...mapState({
+      movies: 'movies'
     })
+  },
+  async mounted () {
+    this.$store.commit('initSearchParams')
+    await this.$store.dispatch('loadMovies')
   }
 }
 </script>

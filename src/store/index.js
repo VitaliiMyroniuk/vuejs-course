@@ -1,66 +1,80 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import movies from '@/assets/movies.json'
+import movieClient from '../api/movieClient'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    movies: movies,
-    searchOption: 'title',
-    inputValue: '',
-    sortOption: 'release_date'
+    movie: {},
+    movies: [],
+    searchParams: {}
   },
-  getters: {
-    getMovies: state => {
-      return state.movies.sort((a, b) => state.sortOption === 'release_date'
-        ? b.release_date.localeCompare(a.release_date)
-        : b.vote_average - a.vote_average
-      )
-    },
-    getMovieById: state => id => {
-      return state.movies.find(movie => `${movie.id}` === id)
-    },
-    getSimilarMoviesById: (state, getters) => id => {
-      const genres = getters.getMovieById(id).genres
-      return state.movies.filter(movie => movie.genres
-        .filter(genre => genres.includes(genre))
-        .length
-      )
-    }
-  },
+
   mutations: {
-    RESET_STATE (state) {
-      state.movies = movies
-      state.searchOption = 'title'
-      state.inputValue = ''
-      state.sortOption = 'release_date'
+    initSearchParams: (state) => {
+      state.searchParams.sortBy = 'release_date'
+      state.searchParams.sortOrder = 'desc'
+      state.searchParams.search = ''
+      state.searchParams.searchBy = 'title'
+      state.searchParams.filter = ''
+      state.searchParams.offset = 0
+      state.searchParams.limit = 15
     },
 
-    SEARCH_MOVIES (state) {
-      if (state.inputValue && state.searchOption === 'title') {
-        state.movies = movies.filter(movie => movie.title.toLowerCase().includes(state.inputValue.toLowerCase()))
-      } else if (state.inputValue) {
-        state.movies = movies.filter(movie => movie.genres
-          .filter(genre => genre.toLowerCase().includes(state.inputValue.toLowerCase()))
-          .length)
-      } else {
-        state.movies = movies
+    setMovie: (state, movie) => {
+      state.movie = movie
+    },
+
+    setMovies: (state, movies) => {
+      state.movies = movies
+    },
+
+    setSortBy: (state, sortBy) => {
+      state.searchParams.sortBy = sortBy
+    },
+
+    setSortOrder: (state, sortOrder) => {
+      state.searchParams.sortOrder = sortOrder
+    },
+
+    setSearchInput: (state, searchInput) => {
+      state.searchParams.search = searchInput.trim()
+    },
+
+    setSearchBy: (state, searchBy) => {
+      state.searchParams.searchBy = searchBy
+    },
+
+    setOffset: (state, offset) => {
+      state.searchParams.offset = offset
+    },
+
+    setLimit: (state, limit) => {
+      state.searchParams.limit = limit
+    }
+  },
+
+  actions: {
+    loadMovies: async context => {
+      try {
+        const searchParams = context.state.searchParams
+        const searchResult = await movieClient.getMovies(searchParams)
+        context.commit('setMovies', searchResult.data.data)
+      } catch (err) {
+        console.error(err)
       }
     },
 
-    UPDATE_INPUT_VALUE (state, inputValue) {
-      state.inputValue = inputValue
-    },
-
-    UPDATE_SEARCH_OPTION (state, searchOption) {
-      state.searchOption = searchOption
-    },
-
-    UPDATE_SORT_OPTION (state, sortOption) {
-      state.sortOption = sortOption
+    loadMovieById: async (context, id) => {
+      try {
+        const searchResult = await movieClient.getMovieById(id)
+        context.commit('setMovie', searchResult.data)
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
-  actions: {},
+
   modules: {}
 })

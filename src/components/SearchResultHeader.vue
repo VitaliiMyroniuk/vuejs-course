@@ -27,11 +27,13 @@ export default {
     genres: Array
   },
   methods: {
-    sortByReleaseDate () {
-      this.$store.commit('UPDATE_SORT_OPTION', 'release_date')
+    async sortByReleaseDate () {
+      this.$store.commit('setSortBy', 'release_date')
+      await this.$store.dispatch('loadMovies')
     },
-    sortByRating () {
-      this.$store.commit('UPDATE_SORT_OPTION', 'rating')
+    async sortByRating () {
+      this.$store.commit('setSortBy', 'vote_average')
+      await this.$store.dispatch('loadMovies')
     }
   },
   computed: {

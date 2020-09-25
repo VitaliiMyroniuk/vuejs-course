@@ -31,9 +31,11 @@ export default {
     movie: Object
   },
   methods: {
-    onClick () {
-      this.$store.commit('RESET_STATE')
-      this.$router.push('/movie/' + this.movie.id)
+    async onClick () {
+      await this.$store.dispatch('loadMovieById', this.movie.id)
+      this.$store.commit('initSearchParams')
+      await this.$store.dispatch('loadMovies')
+      await this.$router.push('/movie/' + this.movie.id)
     }
   }
 }
