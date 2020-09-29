@@ -20,10 +20,10 @@ export default {
   },
   methods: {
     searchByTitle () {
-      this.$store.commit('UPDATE_SEARCH_OPTION', 'title')
+      this.$store.commit('setSearchBy', 'title')
     },
     searchByGenre () {
-      this.$store.commit('UPDATE_SEARCH_OPTION', 'genre')
+      this.$store.commit('setSearchBy', 'genres')
     }
   }
 }
