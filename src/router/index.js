@@ -13,7 +13,7 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/movie/:id',
+    path: '/movie/:id(\\d+)',
     name: 'MovieDetailsPage',
     component: MovieDetailsPage
   },
@@ -25,6 +25,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
   scrollBehavior () {
     window.scrollTo(0, 0)

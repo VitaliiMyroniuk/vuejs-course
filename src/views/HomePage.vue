@@ -25,7 +25,7 @@ export default {
     })
   },
   async mounted () {
-    this.$store.commit('initSearchParams')
+    this.$store.commit('setSearchParams', this.$route.query)
     await this.$store.dispatch('loadMovies')
   }
 }

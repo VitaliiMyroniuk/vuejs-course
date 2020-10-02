@@ -17,7 +17,6 @@ export default new Vuex.Store({
       state.searchParams.sortOrder = 'desc'
       state.searchParams.search = ''
       state.searchParams.searchBy = 'title'
-      state.searchParams.filter = ''
       state.searchParams.offset = 0
       state.searchParams.limit = 15
     },
@@ -28,6 +27,15 @@ export default new Vuex.Store({
 
     setMovies: (state, movies) => {
       state.movies = movies
+    },
+
+    setSearchParams: (state, params) => {
+      state.searchParams.sortBy = params.sortBy || 'release_date'
+      state.searchParams.sortOrder = params.sortOrder || 'desc'
+      state.searchParams.search = params.search || ''
+      state.searchParams.searchBy = params.searchBy || 'title'
+      state.searchParams.offset = params.offset || 0
+      state.searchParams.limit = params.limit || 15
     },
 
     setSortBy: (state, sortBy) => {
